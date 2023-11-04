@@ -4,10 +4,10 @@
 
 No Flash, No Java, No Websocket, No Bullshit.
 
-This is a very lightweight Speedtest implemented in Javascript, using XMLHttpRequest and Web Workers.
+This is a very lightweight speed test implemented in Javascript, using XMLHttpRequest and Web Workers.
 
 ## Try it
-[Take a Speedtest](https://librespeed.org)
+[Take a speed test](https://librespeed.org)
 
 ## Compatibility
 All modern browsers are supported: IE11, latest Edge, latest Chrome, latest Firefox, latest Safari.  
@@ -29,17 +29,30 @@ Works with mobile versions too.
 ## Server requirements
 * A reasonably fast web server with Apache 2 (nginx, IIS also supported)
 * PHP 5.4 (other backends also available)
-* MySQL database to store test results (optional, PostgreSQL and SQLite also supported)
+* MySQL database to store test results (optional, Microsoft SQL Server, PostgreSQL and SQLite also supported)
 * A fast! internet connection
 
-## Installation videos
+## Installation
+Assuming you have PHP installed, the installation steps are quite simple.
+I set this up on a QNAP.
+For this example, I am using a folder called **speedtest** in my web share area.
+
+1. Choose one of the example-xxx.html files as your new index.html in your speedtest folder. I used: example-singleServer-full.html
+2. Add: speedtest.js, speedtest_worker.js, and favicon.ico to your speedtest folder.
+3. Download all of the backend folder into speedtest/backend.
+4. Download all of the results folder into speedtest/results.
+5. Be sure your permissions allow execute (755).
+6. Visit YOURSITE/speedtest/index.html and voila!
+
+### Installation Video
+There is a more in-depth installation video here:
 * [Quick start installation guide for Ubuntu Server 19.04](https://fdossena.com/?p=speedtest/quickstart_v5_ubuntu.frag)
 
 ## Android app
 A template to build an Android client for your LibreSpeed installation is available [here](https://github.com/librespeed/speedtest-android).
 
 ## Docker
-A docker image is available on the [Docker Hub](https://registry.hub.docker.com/r/adolfintel/speedtest), see `doc_docker.md` for more info about it
+A docker image is available on the [Docker Hub](https://registry.hub.docker.com/r/adolfintel/speedtest), check our [docker documentation](doc_docker.md) for more info about it
 
 ## Go backend
 A Go implementation is available in the [`speedtest-go`](https://github.com/librespeed/speedtest-go) repo, maintained by [Maddie Zhan](https://github.com/maddie).
