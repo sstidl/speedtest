@@ -1,19 +1,30 @@
 FROM php:8-alpine
-
-# Install Apache, bash, and curl (php:8-alpine already includes PHP with extensions)
-RUN apk add --no-cache \
+RUN apk add --quiet --no-cache \
     bash \
     apache2 \
-    apache2-proxy \
-    curl \
-    && ln -sf /dev/stdout /var/log/apache2/access.log \
-    && ln -sf /dev/stderr /var/log/apache2/error.log
+    php-apache2 \
+    php-ctype \
+    php-phar \
+    php-gd \
+    php-openssl \
+    php-pdo \
+    php-pdo_mysql \
+    php-pdo_pgsql \
+    php-pdo_sqlite \
+    php-pgsql \
+    php-session \
+    php-sqlite3
 
-# use docker-php-extension-installer to add any additional PHP extensions needed
+# use docker-php-extension-installer for automatically get the right packages installed
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
-# Install PHP extensions needed by LibreSpeed
-RUN install-php-extensions gd pdo pdo_mysql pdo_pgsql pgsql
+
+
+# Install extensions
+RUN install-php-extensions iconv gd pdo pdo_mysql pdo_pgsql pgsql
+
+RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
+    ln -sf /dev/stderr /var/log/apache2/error.log
 
 # Prepare files and folders
 RUN mkdir -p /speedtest/
