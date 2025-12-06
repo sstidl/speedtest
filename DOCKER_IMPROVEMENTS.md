@@ -5,10 +5,11 @@
 ### Issues Identified
 
 #### Dockerfile.alpine
-1. **Duplicate PHP extension installation**: Extensions are installed twice
-   - First via `apk add` (php-gd, php-pdo, etc.)
-   - Then via `install-php-extensions` (iconv, gd, pdo, etc.)
-2. **Unnecessary tool**: The docker-php-extension-installer is downloaded but redundant since Alpine's package manager already provides everything needed
+1. **Incompatible PHP packages**: Original tried to install Alpine system PHP packages (php-gd, php-pdo, php-sqlite3, etc.) which:
+   - Don't exist in Alpine 3.23 (package names changed to php83-*)
+   - Conflict with the php:8-alpine base image which already has PHP compiled in
+   - Are completely unnecessary since php:8-alpine includes PHP
+2. **docker-php-extension-installer IS needed**: This tool correctly installs PHP extensions that work with the official PHP Docker image
 
 #### Dockerfile (Debian)
 1. **Not using multi-stage builds**: Could reduce final image size
